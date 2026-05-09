@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCare - Hospital Appointment System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <h1>🏥 MediCare</h1>
+                <p>Hospital & Clinic Services</p>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="navbar">
+            <button class="nav-btn active" data-section="home">Home</button>
+            <button class="nav-btn" data-section="doctors">Doctors</button>
+            <button class="nav-btn" data-section="appointment">Book Appointment</button>
+            <button class="nav-btn" data-section="bookings">My Bookings</button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Home Section -->
+            <section id="home" class="section active">
+                <div class="welcome-section">
+                    <h2>Welcome to MediCare Hospital</h2>
+                    <p>Your trusted healthcare provider for quality medical services</p>
+                    <button class="btn btn-primary" onclick="switchSection('appointment')">
+                        Book an Appointment
+                    </button>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>👨‍⚕️ Expert Doctors</h3>
+                        <p>Experienced medical professionals</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>⏰ Flexible Schedule</h3>
+                        <p>Appointments every 10 minutes</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>💻 Easy Booking</h3>
+                        <p>Book online in seconds</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>📋 Patient Care</h3>
+                        <p>Personalized treatment plans</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Doctors Section -->
+            <section id="doctors" class="section">
+                <h2>Our Doctors</h2>
+                <div class="doctors-grid" id="doctorsList">
+                    <!-- Doctors will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Appointment Booking Section -->
+            <section id="appointment" class="section">
+                <h2>Book Appointment</h2>
+                <div class="appointment-container">
+                    <div class="appointment-form">
+                        <!-- Step 1: Patient Information -->
+                        <div class="form-step active" id="step1">
+                            <h3>Step 1: Patient Information</h3>
+                            <div class="form-group">
+                                <label for="patientName">Full Name *</label>
+                                <input type="text" id="patientName" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="patientAge">Age *</label>
+                                <input type="number" id="patientAge" placeholder="Enter your age" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="patientGender">Gender *</label>
+                                <select id="patientGender" required>
+                                    <option value="">Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="patientPhone">Phone Number *</label>
+                                <input type="tel" id="patientPhone" placeholder="Enter your phone number" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="patientEmail">Email *</label>
+                                <input type="email" id="patientEmail" placeholder="Enter your email" required>
+                            </div>
+                            <button class="btn btn-primary" onclick="nextStep(1)">Next</button>
+                        </div>
+
+                        <!-- Step 2: Select Doctor -->
+                        <div class="form-step" id="step2">
+                            <h3>Step 2: Select Doctor</h3>
+                            <div class="doctor-selection" id="doctorSelection">
+                                <!-- Doctors will be loaded here -->
+                            </div>
+                            <button class="btn btn-secondary" onclick="prevStep(2)">Back</button>
+                            <button class="btn btn-primary" onclick="nextStep(2)">Next</button>
+                        </div>
+
+                        <!-- Step 3: Select Date and Time -->
+                        <div class="form-step" id="step3">
+                            <h3>Step 3: Select Date & Time</h3>
+                            <div class="form-group">
+                                <label for="appointmentDate">Select Date *</label>
+                                <input type="date" id="appointmentDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Select Time Slot (10-minute intervals) *</label>
+                                <div class="time-slots" id="timeSlots">
+                                    <!-- Time slots will be generated here -->
+                                </div>
+                            </div>
+                            <button class="btn btn-secondary" onclick="prevStep(3)">Back</button>
+                            <button class="btn btn-primary" onclick="nextStep(3)">Next</button>
+                        </div>
+
+                        <!-- Step 4: Confirmation -->
+                        <div class="form-step" id="step4">
+                            <h3>Step 4: Confirm Booking</h3>
+                            <div class="confirmation-box" id="confirmationDetails">
+                                <!-- Confirmation details will be displayed here -->
+                            </div>
+                            <button class="btn btn-secondary" onclick="prevStep(4)">Back</button>
+                            <button class="btn btn-success" onclick="completeBooking()">Confirm Booking</button>
+                        </div>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="progress-bar">
+                        <div class="progress-step active" id="progress1">1</div>
+                        <div class="progress-line"></div>
+                        <div class="progress-step" id="progress2">2</div>
+                        <div class="progress-line"></div>
+                        <div class="progress-step" id="progress3">3</div>
+                        <div class="progress-line"></div>
+                        <div class="progress-step" id="progress4">4</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- My Bookings Section -->
+            <section id="bookings" class="section">
+                <h2>My Bookings</h2>
+                <div class="bookings-list" id="bookingsList">
+                    <!-- Bookings will be displayed here -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 MediCare Hospital. All rights reserved.</p>
+            <p>24/7 Customer Support: 1-800-MEDICAL</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
